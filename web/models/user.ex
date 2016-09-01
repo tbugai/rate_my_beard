@@ -11,4 +11,11 @@ defmodule RateMyBeard.User do
 
     timestamps
   end
+
+  @allowed_params ~w(name email password password_confirmation)
+
+  def changeset(model, params \\ :empty) do
+    model
+    |> cast(params, @allowed_params)
+  end
 end
