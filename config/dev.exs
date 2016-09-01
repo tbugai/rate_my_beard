@@ -33,6 +33,10 @@ config :logger, :console, format: "[$level] $message\n"
 # in production as building large stacktraces may be expensive.
 config :phoenix, :stacktrace_depth, 20
 
+config :ex_aws,
+  access_key_id: System.get_env("AWS_ACCESS_KEY"),
+  secret_access_key: System.get_env("AWS_SECRET_ACCESS_KEY")
+
 # Configure your database
 config :rate_my_beard, RateMyBeard.Repo,
   adapter: Ecto.Adapters.Postgres,

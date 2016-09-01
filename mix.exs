@@ -19,7 +19,7 @@ defmodule RateMyBeard.Mixfile do
   def application do
     [mod: {RateMyBeard, []},
      applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex]]
+                    :phoenix_ecto, :postgrex, :ex_aws, :httpoison]]
   end
 
   # Specifies which paths to compile per environment.
@@ -39,7 +39,10 @@ defmodule RateMyBeard.Mixfile do
      {:gettext, "~> 0.11"},
      {:cowboy, "~> 1.0"},
      {:arc_ecto, "~> 0.3.1"},
-     {:comeonin, "~> 2.5"}]
+     {:ex_aws, "~> 0.4.10"},
+     {:comeonin, "~> 2.5"},
+     {:httpoison, "~> 0.7"},
+     {:poison, "~> 1.2"}]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.

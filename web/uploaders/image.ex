@@ -4,30 +4,32 @@ defmodule RateMyBeard.Image do
   # Include ecto support (requires package arc_ecto installed):
   use Arc.Ecto.Definition
 
-  @versions [:original]
-
-  # To add a thumbnail version:
-  # @versions [:original, :thumb]
+  @versions [:original, :thumb]
+  @acl :public_read
 
   # Whitelist file extensions:
-  # def validate({file, _}) do
-  #   ~w(.jpg .jpeg .gif .png) |> Enum.member?(Path.extname(file.file_name))
-  # end
+  def validate({file, _}) do
+    ~w(.jpg .jpeg .gif .png) |> Enum.member?(Path.extname(file.file_name))
+  end
 
   # Define a thumbnail transformation:
-  # def transform(:thumb, _) do
-  #   {:convert, "-strip -thumbnail 250x250^ -gravity center -extent 250x250 -format png", :png}
-  # end
+  def transform(:thumb, _) do
+    {:convert, "-strip -thumbnail 200x200> -gravity center -extent 200x200> -format png", :png}
+  end
+
+  def transform(:original, _) do
+    {:convert, "-resize 500x500> -format png", :png}
+  end
 
   # Override the persisted filenames:
   # def filename(version, _) do
   #   version
   # end
 
-  # Override the storage directory:
-  # def storage_dir(version, {file, scope}) do
-  #   "uploads/user/avatars/#{scope.id}"
-  # end
+  # Override the storage directory
+  def storage_dir(_, {file, entry}) do
+    "uploads/beards"
+  end
 
   # Provide a default URL if there hasn't been a file uploaded
   # def default_url(version, scope) do
@@ -43,5 +45,5 @@ defmodule RateMyBeard.Image do
   #   [content_type: Plug.MIME.path(file.file_name)]
   # end
 
-  def __storage, do: Arc.Storage.Local
+  # def __storage, do: Arc.Storage.Local
 end
