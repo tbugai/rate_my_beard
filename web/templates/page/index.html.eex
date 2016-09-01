@@ -6,10 +6,10 @@
     <aside class="info">
       <h2><%= entry.title %></h2>
       <span class="actions">
-        <%= link "Vote Up", to: page_path(@conn, :index), class: "btn btn-primary" %>
-        <%= link "Vote Down", to: page_path(@conn, :index), class: "btn btn-primary" %>
+        <%= link fa_icon("thumbs-up", text: "#{entry.up_votes}"), to: entry_entry_path(@conn, :up_vote, entry.id), method: :post, class: "btn btn-primary" %>
+        <%= link fa_icon("thumbs-down", text: "#{entry.down_votes}"), to: entry_entry_path(@conn, :down_vote, entry.id), method: :post, class: "btn btn-primary" %>
         <%= if @current_user do %>
-          <%= link "Remove", to: entry_path(@conn, :delete, entry.id), method: :delete, class: "btn btn-danger" %>
+          <%= link fa_icon("trash"), to: entry_path(@conn, :delete, entry.id), method: :delete, class: "btn btn-danger" %>
         <% end %>
       </span>
     </aside>

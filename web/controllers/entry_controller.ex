@@ -9,7 +9,7 @@ defmodule RateMyBeard.EntryController do
   end
 
   def create(conn, %{"entry" => entry_params}) do
-    changeset = Entry.changeset(%Entry{}, entry_params)
+    changeset = Entry.changeset(%Entry{up_votes: 0, down_votes: 0}, entry_params)
 
     case Repo.insert(changeset) do
       {:ok, _} ->
@@ -20,6 +20,40 @@ defmodule RateMyBeard.EntryController do
         conn
         |> put_flash(:error, "Oops!  Something went wrong trying to create the beard.")
         |> render("new.html", changeset: changeset)
+    end
+  end
+
+  def up_vote(conn, %{"entry_id" => id}) do
+    entry = Repo.get_by(Entry, id: id)
+
+    Entry.up_vote(entry)
+    |> Repo.update()
+    |> case do
+      {:ok, _entry} ->
+        conn
+        |> put_flash(:info, "Vote counted!  Thanks!")
+        |> redirect(to: page_path(conn, :index))
+      {:error, _changeset} ->
+        conn
+        |> put_flash(:warn, "Unable to count your vote :(")
+        |> redirect(to: page_path(conn, :index))
+    end
+  end
+
+  def down_vote(conn, %{"entry_id" => id}) do
+    entry = Repo.get_by(Entry, id: id)
+
+    Entry.down_vote(entry)
+    |> Repo.update()
+    |> case do
+      {:ok, _entry} ->
+        conn
+        |> put_flash(:info, "Vote counted!  Thanks!")
+        |> redirect(to: page_path(conn, :index))
+      {:error, _changeset} ->
+        conn
+        |> put_flash(:warn, "Unable to count your vote :(")
+        |> redirect(to: page_path(conn, :index))
     end
   end
 

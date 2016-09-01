@@ -4,7 +4,7 @@ defmodule RateMyBeard.Image do
   # Include ecto support (requires package arc_ecto installed):
   use Arc.Ecto.Definition
 
-  @versions [:original, :thumb]
+  @versions [:original]
   @acl :public_read
 
   # Whitelist file extensions:
@@ -13,12 +13,12 @@ defmodule RateMyBeard.Image do
   end
 
   # Define a thumbnail transformation:
-  def transform(:thumb, _) do
-    {:convert, "-strip -thumbnail 200x200> -gravity center -extent 200x200> -format png", :png}
-  end
+  # def transform(:thumb, _) do
+  #   {:convert, "-strip -thumbnail 200x200> -gravity center -extent 200x200> -format png", :png}
+  # end
 
   def transform(:original, _) do
-    {:convert, "-resize 500x500> -format png", :png}
+    {:convert, "-extent 500x500> -gravity center -format png", :png}
   end
 
   # Override the persisted filenames:

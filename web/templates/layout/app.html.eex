@@ -18,10 +18,10 @@
         <nav role="navigation">
           <ul class="nav nav-pills pull-right">
             <%= if @current_user do %>
-              <li><%= link "Users", to: users_path(@conn, :index), class: "btn" %></li>
-              <li><%= link "Logout", to: session_path(@conn, :delete, @current_user.id), method: :delete, class: "btn btn-primary" %></li>
+              <li><%= link fa_icon("user", text: "Users"), to: users_path(@conn, :index), class: "btn btn-secondary" %></li>
+              <li><%= link fa_icon("sign-out", text: "Logout"), to: session_path(@conn, :delete, @current_user.id), method: :delete, class: "btn btn-primary" %></li>
             <% else %>
-              <li><%= link "Login", to: session_path(@conn, :new), class: "btn btn-primary" %></li>
+              <li><%= link fa_icon("sign-in", text: "Login"), to: session_path(@conn, :new), class: "btn btn-primary" %></li>
             <% end %>
           </ul>
         </nav>
