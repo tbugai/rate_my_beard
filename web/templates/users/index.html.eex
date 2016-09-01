@@ -1,0 +1,23 @@
+<h2>Users</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= for user <- @users do %>
+      <tr>
+        <td><%= user.name %></td>
+        <td><%= user.email %></td>
+        <td>
+          <%= link "Update", to: users_path(@conn, :edit, user.id), class: "btn btn-secondary" %>
+          <%= link "Delete", to: users_path(@conn, :delete, user.id), method: :delete, class: "btn btn-danger" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

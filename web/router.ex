@@ -19,6 +19,7 @@ defmodule RateMyBeard.Router do
 
     resources "/entry", EntryController, except: [:index]
     resources "/session", SessionController, except: [:index]
+    resources "/users", UsersController
     get "/", PageController, :index
 
   end

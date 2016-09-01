@@ -1,8 +1,6 @@
 defmodule RateMyBeard.User do
   use RateMyBeard.Web, :model
 
-  alias RateMyBeard.{Repo, User}
-
   schema "users" do
     field :name, :string
     field :email, :string
