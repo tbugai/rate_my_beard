@@ -15,4 +15,4 @@ config :rate_my_beard, RateMyBeard.Endpoint,
 config :rate_my_beard, RateMyBeard.Repo,
   adapter: Ecto.Adapters.Postgres,
   url: System.get_env("DATABASE_URL"),
-  pool_size: 20
+  pool_size: 10
