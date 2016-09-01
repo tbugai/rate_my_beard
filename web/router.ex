@@ -16,7 +16,9 @@ defmodule RateMyBeard.Router do
   scope "/", RateMyBeard do
     pipe_through :browser # Use the default browser stack
 
+    resources "/entry", EntryController, except: [:index]  
     get "/", PageController, :index
+
   end
 
   # Other scopes may use custom stacks.

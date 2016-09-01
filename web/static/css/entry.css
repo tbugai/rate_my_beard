@@ -1,0 +1,18 @@
+.entry {
+  height: 220px;
+  margin: 10px 0;
+  border: 1px solid #eee;
+  border-radius: 5px;
+}
+
+.entry .img {
+  margin: 10px;
+  width: 200px;
+  height:200px;
+  float: left;
+}
+
+.entry aside h2 {
+  font-size: 18pt;
+  color: #666;
+}
