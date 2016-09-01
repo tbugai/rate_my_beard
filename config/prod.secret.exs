@@ -14,7 +14,5 @@ config :rate_my_beard, RateMyBeard.Endpoint,
 # Configure your database
 config :rate_my_beard, RateMyBeard.Repo,
   adapter: Ecto.Adapters.Postgres,
-  username: System.get_env("DATABASE_USERNAME"),
-  password: System.get_env("DATABASE_PASSWORD"),
-  database: "rate_my_beard_prod",
+  url: System.get_env("DATABASE_URL"),
   pool_size: 20
