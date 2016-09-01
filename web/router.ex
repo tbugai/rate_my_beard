@@ -7,6 +7,7 @@ defmodule RateMyBeard.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug RateMyBeard.CurrentUser
   end
 
   pipeline :api do
@@ -16,7 +17,8 @@ defmodule RateMyBeard.Router do
   scope "/", RateMyBeard do
     pipe_through :browser # Use the default browser stack
 
-    resources "/entry", EntryController, except: [:index]  
+    resources "/entry", EntryController, except: [:index]
+    resources "/session", SessionController, except: [:index]
     get "/", PageController, :index
 
   end

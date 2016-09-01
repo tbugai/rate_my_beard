@@ -8,7 +8,9 @@
       <span class="actions">
         <%= link "Vote Up", to: page_path(@conn, :index), class: "btn btn-primary" %>
         <%= link "Vote Down", to: page_path(@conn, :index), class: "btn btn-primary" %>
-        <%= link "Remove", to: entry_path(@conn, :delete, entry.id), method: :delete, class: "btn btn-danger" %>
+        <%= if @current_user do %>
+          <%= link "Remove", to: entry_path(@conn, :delete, entry.id), method: :delete, class: "btn btn-danger" %>
+        <% end %>
       </span>
     </aside>
   </div>
