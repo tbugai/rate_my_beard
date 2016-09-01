@@ -9,6 +9,7 @@
 
     <title>Hello RateMyBeard!</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+    <script src="https://use.fontawesome.com/c6eab05a5d.js"></script>
   </head>
 
   <body>

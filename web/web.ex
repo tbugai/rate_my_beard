@@ -52,6 +52,8 @@ defmodule RateMyBeard.Web do
       import RateMyBeard.Router.Helpers
       import RateMyBeard.ErrorHelpers
       import RateMyBeard.Gettext
+
+      import FontAwesomePhoenix.HTML
     end
   end
 

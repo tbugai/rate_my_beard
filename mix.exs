@@ -42,7 +42,8 @@ defmodule RateMyBeard.Mixfile do
      {:ex_aws, "~> 0.4.10"},
      {:comeonin, "~> 2.5"},
      {:httpoison, "~> 0.7"},
-     {:poison, "~> 1.2"}]
+     {:poison, "~> 1.2"},
+     {:font_awesome_phoenix, "~> 0.1"}]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.
