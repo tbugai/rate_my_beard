@@ -8,6 +8,8 @@ defmodule RateMyBeard.Entry do
     field :up_votes,    :integer
     field :down_votes,  :integer
 
+    has_many :votes, RateMyBeard.Vote
+
     timestamps
   end
 
