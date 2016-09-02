@@ -17,10 +17,7 @@ defmodule RateMyBeard.Router do
   scope "/", RateMyBeard do
     pipe_through :browser # Use the default browser stack
 
-    resources "/entry", EntryController, except: [:index, :update, :edit, :show] do
-      post "/up_vote", EntryController, :up_vote
-      post "/down_vote", EntryController, :down_vote
-    end
+    resources "/entry", EntryController, except: [:index, :update, :edit, :show]
     resources "/session", SessionController, except: [:index, :show, :edit, :update]
     resources "/users", UsersController, except: [:show]
     get "/", PageController, :index
@@ -28,7 +25,10 @@ defmodule RateMyBeard.Router do
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", RateMyBeard do
-  #   pipe_through :api
-  # end
+  scope "/api", RateMyBeard do
+    pipe_through :api
+
+    post "/up_vote/:id", EntryController, :up_vote
+    post "/down_vote/:id", EntryController, :down_vote
+  end
 end

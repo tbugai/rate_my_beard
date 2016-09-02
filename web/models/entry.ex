@@ -15,6 +15,10 @@ defmodule RateMyBeard.Entry do
   @optional_fields ~w(up_votes down_votes)
   @required_file_fields ~w(image)
 
+  def ordered(query) do
+    query |> order_by([t], t.inserted_at)
+  end
+
   def changeset(model, params \\ :empty) do
     model
     |> cast(params, @required_fields)

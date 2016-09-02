@@ -23,37 +23,29 @@ defmodule RateMyBeard.EntryController do
     end
   end
 
-  def up_vote(conn, %{"entry_id" => id}) do
+  def up_vote(conn, %{"id" => id}) do
     entry = Repo.get_by(Entry, id: id)
 
     Entry.up_vote(entry)
     |> Repo.update()
     |> case do
-      {:ok, _entry} ->
-        conn
-        |> put_flash(:info, "Vote counted!  Thanks!")
-        |> redirect(to: page_path(conn, :index))
+      {:ok, entry} ->
+        render(conn, "entry.json", entry: entry)
       {:error, _changeset} ->
-        conn
-        |> put_flash(:warn, "Unable to count your vote :(")
-        |> redirect(to: page_path(conn, :index))
+        render(conn, "error.json")
     end
   end
 
-  def down_vote(conn, %{"entry_id" => id}) do
+  def down_vote(conn, %{"id" => id}) do
     entry = Repo.get_by(Entry, id: id)
 
     Entry.down_vote(entry)
     |> Repo.update()
     |> case do
-      {:ok, _entry} ->
-        conn
-        |> put_flash(:info, "Vote counted!  Thanks!")
-        |> redirect(to: page_path(conn, :index))
+      {:ok, entry} ->
+        render(conn, "entry.json", entry: entry)
       {:error, _changeset} ->
-        conn
-        |> put_flash(:warn, "Unable to count your vote :(")
-        |> redirect(to: page_path(conn, :index))
+        render(conn, "error.json")
     end
   end
 
