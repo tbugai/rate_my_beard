@@ -44,25 +44,11 @@ defmodule RateMyBeard.EntryController do
   end
 
   def down_vote(conn, %{"id" => id}) do
-    vote_address = ip_address_string(conn.remote_ip)
-
-    entry = Repo.get_by(Entry, id: id)
-    vote = Repo.get_by(Vote, entry_id: entry.id, ip_address: vote_address)
-
-    if vote do
-      render(conn, "entry.json", entry: entry)
-    else
-      changeset = Vote.changeset(%Vote{}, %{ip_address: vote_address, entry_id: entry.id})
-      Repo.insert(changeset)
-
-      Entry.down_vote(entry)
-      |> Repo.update()
-      |> case do
-        {:ok, entry} ->
-          render(conn, "entry.json", entry: entry)
-        {:error, _changeset} ->
-          render(conn, "error.json")
-      end
+    case RateMyBeard.DownVote.record_and_return_votef(conn, id) do
+      {:ok, vote} ->
+        render(conn, "entry.json", entry: vote.entry)
+      {:error, _vote} ->
+        render(conn, "error.json")
     end
   end
 
