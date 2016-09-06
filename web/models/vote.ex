@@ -17,4 +17,9 @@ defmodule RateMyBeard.Vote do
     |> cast(params, @required_fields, @optional_fields)
     |> validate_required(@required_fields, @optional_fields)
   end
+
+  def create_changeset(ip, entry_id) do
+    %RateMyBeard.Vote{}
+    |> changeset(%{ip_address: ip, entry_id: entry_id})
+  end
 end

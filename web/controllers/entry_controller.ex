@@ -25,17 +25,14 @@ defmodule RateMyBeard.EntryController do
 
   def up_vote(conn, %{"id" => id}) do
     vote_address = ip_address_string(conn.remote_ip)
-
-    entry = Repo.get_by(Entry, id: id)
-    vote = Repo.get_by(Vote, entry_id: entry.id, ip_address: vote_address)
+    vote = Repo.get_by(Vote, entry_id: id, ip_address: vote_address).preload(:entry)
 
     if vote do
-      render(conn, "entry.json", entry: entry)
+      render(conn, "already_voted.json")
     else
-      changeset = Vote.changeset(%Vote{}, %{ip_address: vote_address, entry_id: entry.id})
-      Repo.insert(changeset)
+      Repo.insert(Vote.create_changeset(vote_address, id))
 
-      Entry.up_vote(entry)
+      Entry.up_vote(vote.entry)
       |> Repo.update()
       |> case do
         {:ok, entry} ->
